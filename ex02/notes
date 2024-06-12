@@ -1,0 +1,31 @@
+Imports: Import necessary libraries for Flutter, Redux, and HTTP requests.
+
+Main Function: The entry point of the application where the Flutter application is run with MaterialApp.
+
+Constants: Define the API URL for fetching photos.
+
+Person Class: Represents a person with properties like id, title, URL, imageData, and isLoading. Provides methods for JSON serialization and copying objects.
+
+getPersons Function: Fetches a list of persons from the API endpoint using HTTP GET request.
+
+Action Classes: Define various actions like loading people, successfully fetching people, and failing to fetch people.
+
+AppState Class: Represents the state of the application with isLoading flag, fetchedPersons list, and error object. Provides a method for sorting fetched persons.
+
+Reducer Function: Defines how the state changes in response to dispatched actions.
+
+Middleware Functions: Handle asynchronous actions like loading people and loading person images.
+
+HomePage Widget: The main UI component of the application. It displays an app bar, a button to load persons, a loading indicator, and a list of persons with their images.
+
+Store: Creates a Redux store with the defined reducer, initial state, and middleware.
+
+Scaffold: Defines the basic layout structure of the app with an app bar and a body.
+
+StoreProvider: Provides the Redux store to its descendants using the StoreProvider widget.
+
+StoreConnector: Connects the UI components to the Redux store to access and update the application state.
+
+ListView.builder: Builds a scrollable list of person tiles using the fetched persons data.
+
+ListTile: Displays person details like title, age, and image loading button.

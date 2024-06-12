@@ -1,0 +1,41 @@
+redux
+
+state - action - reducer
+
+One Store
+------------------------------------
+ 
+State is an immutable class, they contain your state (const)
+Actions are to be performed on current state  (class or enum)
+Reducers are pure functions
+
+
+------------------------------------
+
+State:
+
+The state represents the entire state of the application at a particular point in time. It is typically a plain JavaScript object or a data structure that holds the data that is used by the application.
+In Redux, the state is considered to be immutable, meaning it cannot be directly modified. Instead, any changes to the state result in the creation of a new state object.
+The state is the single source of truth for the application's data. All components within the application derive their data from the state, ensuring a consistent and predictable data flow.
+------------------------------------
+Action:
+
+Actions are plain JavaScript objects that represent events or updates within the application. They contain a type property that describes the type of action being performed and optionally carry additional data payload.
+Actions are the only way to modify the state in a Redux application. They encapsulate the intention to change the state but do not contain any logic for how the state should be updated.
+Examples of actions include fetching data from a server, updating a user's profile, or toggling a setting within the application.
+------------------------------------
+Reducer:
+
+Reducers are pure functions that specify how the application's state should change in response to actions. They take the current state and an action as input and return a new state as output.
+Reducers are responsible for updating the state based on the action type. They calculate the new state by applying the action's changes to the current state in an immutable manner.
+It's important that reducers remain pure functions, meaning they do not have side effects and do not modify the existing state or any external variables. They only rely on their input parameters to calculate the new state.
+
+------------------------------------
+The interaction between these three components forms the core of the Redux architecture:
+
+Action objects are dispatched by components or other parts of the application to signal changes or events.
+Reducer functions specify how the state should be updated in response to these actions.
+When an action is dispatched, it flows through the reducer, which calculates the new state based on the action and returns it.
+The updated state is then propagated to the application's components, triggering re-renders and updates as necessary.
+
+ 
