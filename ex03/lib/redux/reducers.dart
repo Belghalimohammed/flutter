@@ -4,8 +4,16 @@ import 'package:ex03/redux/state.dart';
 import 'actions.dart';
 
 AppState reducer(AppState oldState, action) {
+  if (action is SelectPerson) {
+    return AppState(
+        isLoading: oldState.isLoading,
+        fetchedPersons: oldState.fetchedPersons,
+        error: oldState.error,
+        selectedPeople: oldState.selectedPeople?.followedBy([action.person]));
+  }
   if (action is EditPersonAction) {
     return AppState(
+      selectedPeople: oldState.selectedPeople,
       isLoading: false,
       fetchedPersons: oldState.fetchedPersons?.map((e) {
         if (e.id == action.id) {
@@ -23,6 +31,7 @@ AppState reducer(AppState oldState, action) {
     );
   } else if (action is DeletePersonAction) {
     return AppState(
+      selectedPeople: oldState.selectedPeople,
       isLoading: false,
       fetchedPersons: oldState.fetchedPersons?.where((e) => e.id != action.id),
       error: oldState.error,
@@ -30,6 +39,7 @@ AppState reducer(AppState oldState, action) {
   } else if (action is AddPersonAction) {
     final person = action.person;
     return AppState(
+      selectedPeople: oldState.selectedPeople,
       isLoading: false,
       fetchedPersons: oldState.fetchedPersons?.followedBy([person]),
       error: oldState.error,
@@ -40,6 +50,7 @@ AppState reducer(AppState oldState, action) {
     );
     if (person != null) {
       return AppState(
+        selectedPeople: oldState.selectedPeople,
         error: oldState.error,
         isLoading: false,
         fetchedPersons: oldState.fetchedPersons
@@ -55,6 +66,7 @@ AppState reducer(AppState oldState, action) {
     );
     if (person != null) {
       return AppState(
+        selectedPeople: oldState.selectedPeople,
         error: oldState.error,
         isLoading: false,
         fetchedPersons: oldState.fetchedPersons
@@ -65,19 +77,22 @@ AppState reducer(AppState oldState, action) {
       return oldState;
     }
   } else if (action is LoadPeopleAction) {
-    return const AppState(
+    return AppState(
+      selectedPeople: oldState.selectedPeople,
       error: null,
       fetchedPersons: null,
       isLoading: true,
     );
   } else if (action is SuccessfullyFetchedPeopleAction) {
     return AppState(
+      selectedPeople: oldState.selectedPeople,
       error: null,
       fetchedPersons: action.persons,
       isLoading: false,
     );
   } else if (action is FailedToFetchPeopleAction) {
     return AppState(
+      selectedPeople: oldState.selectedPeople,
       error: action.error,
       fetchedPersons: oldState.fetchedPersons,
       isLoading: false,

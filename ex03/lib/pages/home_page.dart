@@ -72,7 +72,8 @@ class HomePage extends StatelessWidget {
                     return Dismissible(
                       key: UniqueKey(),
                       onDismissed: (_) {
-                        final person = people.elementAt(index);
+                        store.dispatch(SelectPerson(person: person));
+                        //   final person = people.elementAt(index);
                         // final person = people.elementAt(index);
                         store.dispatch(DeletePersonAction(id: person.id));
                       },
@@ -107,6 +108,12 @@ class HomePage extends StatelessWidget {
             },
             child: const Text('Go to Second Page'),
           ),
+          StoreConnector<AppState, Iterable<Person>?>(
+            builder: (context, selectedPeople) {
+              return Text(selectedPeople!.length.toString());
+            },
+            converter: (store) => store.state.selectedPeople,
+          )
         ],
       ),
     );

@@ -21,6 +21,13 @@ class AddPersonAction extends Action {
 }
 
 @immutable
+class SelectPerson extends Action {
+  final Person person;
+
+  const SelectPerson({required this.person});
+}
+
+@immutable
 class DeletePersonAction extends Action {
   final int id;
 
